@@ -1,5 +1,5 @@
 ---
-# Atualiza todos os pacotes do sitema Operacional
+# Atualiza todos os pacotes do sistema Operacional
 - name: Atulizando os pacotes do sistema Operacional
   apt:
     upgrade: dist
@@ -23,14 +23,14 @@
     dest: /etc/nginx/sites-available/static_site.cfg
     notify: Restart nginx
 
-# Cria um link Simbolico 
-- name: Criando o link simbolico
+# Cria um link Simbólico 
+- name: Criando o link simbólico
   file:
     src: /etc/nginx/sites-available/static_site.cfg
     dest: /etc/nginx/sites-enabled/default
     state: link
 
-# Copia os arquivos estaticos so site
+# Copia os arquivos estáticos so site
 - name: Copiando os arquivos estaticos do site
   copy:
     src: index.html
