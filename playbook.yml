@@ -1,0 +1,6 @@
+---
+- name: Default Playbook - Starting Deploy of Server Nginx 
+  hosts: linux
+  become: true
+  roles:
+    - nginx

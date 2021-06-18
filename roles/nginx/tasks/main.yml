@@ -1,0 +1,38 @@
+---
+# Atualiza todos os pacotes do sitema Operacional
+- name: Atulizando os pacotes do sistema Operacional
+  apt:
+    upgrade: dist
+
+# Instala o Nginx
+- name: Instalando o Servidor Nginx
+  apt:
+    name: nginx
+    state: latest
+
+# Starta o Nginx
+- name: Startando o nginx
+  service:
+    name: nginx
+    state: started
+
+# Copia os arquivos de configuração para o servidor remoto
+- name: Copiando o arquivo de configuração do nginx e restarta o nginx
+  copy:
+    src: static_site.cfg
+    dest: /etc/nginx/sites-available/static_site.cfg
+    notify: Restart nginx
+
+# Cria um link Simbolico 
+- name: Criando o link simbolico
+  file:
+    src: /etc/nginx/sites-available/static_site.cfg
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+
+# Copia os arquivos estaticos so site
+- name: Copiando os arquivos estaticos do site
+  copy:
+    src: index.html
+    dest: /usr/share/nginx/html
+    notify: Restart nginx

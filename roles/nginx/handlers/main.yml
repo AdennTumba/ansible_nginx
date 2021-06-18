@@ -1,0 +1,8 @@
+---
+# Restarta o  Nginx
+- name: Restartando o Nginx
+  systemd:
+    state: restarted
+    enable: yes
+    daemon_reload: yes
+    name: nginx
